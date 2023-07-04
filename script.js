@@ -121,25 +121,19 @@ function findEqually() {
 }
 
 function setWinner(row, col) { //I found the winning player
-  if (table[row][col] === players[0]) {
-    messageDisplay('red');
-  } else {
-    messageDisplay('yellow');
-  }
+  messageDisplay(table[row][col]);
   gameFinished = true;
 }
 
 function messageDisplay(status) { //we display the corresponding message
   let message = document.getElementById("message");
   message.innerText = "";
-  if (status === "red") {
-    message.innerText = "Player red win!";
-  } else if (status === "yellow") {
-    message.innerHTML = "Player yellow win!";
+  if (status === "move") {
+    message.innerText = `Player ${activePlayer} to move.`;
   } else if (status === "equal") {
     message.innerHTML = "You are both equally good!";
   } else {
-    message.innerText = `Player ${activePlayer} to move.`;
+    message.innerText = `Player ${status} win!`;
   }
 }
 
