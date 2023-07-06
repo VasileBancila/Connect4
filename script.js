@@ -4,9 +4,9 @@ const players = ['red', 'yellow'];
 let activePlayer = players[0];
 let gameFinished = false;
 let currentCol = [5, 5, 5, 5, 5, 5, 5]; //we keep the row on each column to simulate gravity
-let moves = 0;
+let movesNumber = 0;
 
-window.onload = function gameTable() { //when loading the page we build the game board
+window.onload = function generateGameTable() { //when loading the page we build the game board
   for (let r = 0; r < rows; ++r) { //we form a matrix
     let row = [];
     for (let c = 0; c < columns; ++c) {
@@ -37,14 +37,14 @@ function makeMove() { ////we make the move
     token.style.backgroundColor = players[1];
   }
   changeTurn();
-  ++moves;
+  ++movesNumber;
   --row; //once with the movements on a column we go with the decreasing rows
   currentCol[col] = row;
   findWinnerHorizontally();
   findWinnerVertically();
   findWinnerDiagonally();
   findWinnerAntiDiagonally();
-  findEqually();
+  checkDraw();
 }
 
 function changeTurn() { //change the player
@@ -112,8 +112,8 @@ function findWinnerAntiDiagonally() {
   }
 }
 
-function findEqually() {
-  if (moves === 42) { //we check if it is equal
+function checkDraw() {
+  if (movesNumber === 42) { //we check if the game ended in a draw
     messageDisplay('equal');
     gameFinished = true;
     return;
